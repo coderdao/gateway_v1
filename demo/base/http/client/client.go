@@ -24,7 +24,7 @@ func main() {
 	// 创建客户端
 	client := &http.Client{
 		Transport: transport,
-		Timeout:   30 * time.Second, // 没饿
+		Timeout:   30 * time.Second, // 超时时间
 	}
 
 	// 请求数据
