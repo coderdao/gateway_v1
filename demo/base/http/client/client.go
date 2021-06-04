@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	// 创建连击池
+	// 创建连接池
 	transport := &http.Transport{
 		DialContext: (&net.Dialer{
 			Timeout:   30 * time.Second,

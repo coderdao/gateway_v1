@@ -13,17 +13,18 @@ import (
 */
 type Pxy struct{}
 
+// 定义结构体 实现 ServeHTTP， 使用在
 func (p *Pxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	fmt.Printf("Received request %s %s %s\n", req.Method, req.Host, req.RemoteAddr)
 	transport := http.DefaultTransport
-	// step 1，浅拷贝对象，然后就再新增属性数据
+	// step 1，浅拷贝对象，然后就再新增属性数据； 避免使用同一个 http，下文重定向是被影响
 	outReq := new(http.Request)
 	*outReq = *req
 	if clientIP, _, err := net.SplitHostPort(req.RemoteAddr); err == nil {
 		if prior, ok := outReq.Header["X-Forwarded-For"]; ok {
 			clientIP = strings.Join(prior, ", ") + ", " + clientIP
 		}
-		outReq.Header.Set("X-Forwarded-For", clientIP)
+		outReq.Header.Set("X-Forwarded-For", clientIP)	// X-Forwarded-For 设置远程代理 ip
 	}
 
 	// step 2, 请求下游
