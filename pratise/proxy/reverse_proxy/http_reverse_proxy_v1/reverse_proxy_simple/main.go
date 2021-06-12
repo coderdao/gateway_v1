@@ -21,6 +21,8 @@ func main()  {
 	if err1 != nil {
 		log.Println(err1)
 	}
+
+	// NewSingleHostReverseProxy 方法内封装了重写的规则 
 	proxy := httputil.NewSingleHostReverseProxy(url1)
 	log.Println("Starting httpserver at " + addr)
 	log.Fatal(http.ListenAndServe(addr, proxy))
