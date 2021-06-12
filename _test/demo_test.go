@@ -1,4 +1,4 @@
-package demo
+package _test
 import "testing"
 func TestGetArea(t *testing.T) {
 	area := GetArea(40, 50)
