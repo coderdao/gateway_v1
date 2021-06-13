@@ -16,8 +16,8 @@ func main()  {
 	rs1 := &RealServer{Addr:"127.0.0.1:2003"}
 	rs1.Run()
 
-	rs2 := &RealServer{Addr:"127.0.0.1:2004"}
-	rs2.Run()
+	//rs2 := &RealServer{Addr:"127.0.0.1:2004"}
+	//rs2.Run()
 
 	// 监听服务关闭信号
 	quit := make(chan os.Signal)
@@ -57,7 +57,7 @@ func (r *RealServer) HelloHandler(w http.ResponseWriter, req *http.Request) {
 	req.URL.Path=/abc
 	 */
 
-	// 设置转发参数
+	// 转发前, 设置请求机器参数
 	upath := fmt.Sprintf("http://%s%s\n", r.Addr, req.URL.Path) // 打印请求地址
 	realIP := fmt.Sprintf(
 		"RemoteAddr=%s,X-Forwarded-For=%v,X-Real-Ip=%v\n",

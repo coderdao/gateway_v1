@@ -9,9 +9,9 @@ import (
 
 func main()  {
 	http.HandleFunc("/", handler)
-	log.Println("start serving on port" + port)
+	log.Println("start serving on port:" + server_port)
 
-	err := http.ListenAndServe(":"+port, nil)
+	err := http.ListenAndServe(":"+server_port, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -19,7 +19,7 @@ func main()  {
 
 var (
 	proxy_addr = "http://127.0.0.1:2003"
-	port = "2002"
+	server_port = "2002"
 )
 
 func handler(w http.ResponseWriter, r *http.Request)  {
