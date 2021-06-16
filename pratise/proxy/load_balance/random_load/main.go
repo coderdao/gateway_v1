@@ -2,8 +2,10 @@ package random_load
 
 import (
 	"errors"
+	"fmt"
 	"gateway/pratise/proxy/load_balance"
 	"math/rand"
+	"strings"
 )
 
 /**
@@ -38,4 +40,21 @@ func (r *RandomBalance) Next() string {
 
 func (r *RandomBalance) Get(key string) (string, error) {
 	return r.Next(), nil
+}
+
+func (r *RandomBalance) Update() {
+	if conf, ok := r.conf.(*load_balance.LoadBalanceZkConf); ok {
+		fmt.Println("Update get conf:", conf.GetConf())
+		r.rss = []string{}
+		for _, ip := range conf.GetConf() {
+			r.Add(strings.Split(ip, ",")...)
+		}
+	}
+	if conf, ok := r.conf.(*load_balance.LoadBalanceCheckConf); ok {
+		fmt.Println("Update get conf:", conf.GetConf())
+		r.rss = nil
+		for _, ip := range conf.GetConf() {
+			r.Add(strings.Split(ip, ",")...)
+		}
+	}
 }
