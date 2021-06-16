@@ -16,7 +16,7 @@ const (
 	LbConsistentHash
 )
 
-func LoadBanlanceFactory(lbType LbType) LoadBalance {
+func LoadBanlanceFactory(lbType LbType) LoadBalanc {
 	switch lbType {
 	case LbRandom:
 		return &random_load.RandomBalance{}
