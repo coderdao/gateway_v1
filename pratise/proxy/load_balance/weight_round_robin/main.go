@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"gateway/pratise/proxy/load_balance"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -122,19 +123,19 @@ func (r *WeightRoundRobinBalance) SetConf(conf load_balance.LoadBalanceConf) {
 	r.conf = conf
 }
 
-//func (r *WeightRoundRobinBalance) Update() {
-//	if conf, ok := r.conf.(*load_balance.LoadBalanceZkConf); ok {
-//		fmt.Println("WeightRoundRobinBalance get conf:", conf.GetConf())
-//		r.rss = nil
-//		for _, ip := range conf.GetConf() {
-//			r.Add(strings.Split(ip, ",")...)
-//		}
-//	}
-//	if conf, ok := r.conf.(*LoadBalanceCheckConf); ok {
-//		fmt.Println("WeightRoundRobinBalance get conf:", conf.GetConf())
-//		r.rss = nil
-//		for _, ip := range conf.GetConf() {
-//			r.Add(strings.Split(ip, ",")...)
-//		}
-//	}
-//}
+func (r *WeightRoundRobinBalance) Update() {
+	if conf, ok := r.conf.(*load_balance.LoadBalanceZkConf); ok {
+		fmt.Println("WeightRoundRobinBalance get conf:", conf.GetConf())
+		r.rss = nil
+		for _, ip := range conf.GetConf() {
+			r.Add(strings.Split(ip, ",")...)
+		}
+	}
+	if conf, ok := r.conf.(*load_balance.LoadBalanceCheckConf); ok {
+		fmt.Println("WeightRoundRobinBalance get conf:", conf.GetConf())
+		r.rss = nil
+		for _, ip := range conf.GetConf() {
+			r.Add(strings.Split(ip, ",")...)
+		}
+	}
+}
