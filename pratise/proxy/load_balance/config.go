@@ -5,13 +5,6 @@ import (
 	"gateway/pratise/proxy/zookeeper"
 )
 
-package load_balance
-
-import (
-"fmt"
-"github.com/e421083458/gateway_demo/proxy/zookeeper"
-)
-
 // 配置主题
 type LoadBalanceConf interface {
 	Attach(o Observer)
