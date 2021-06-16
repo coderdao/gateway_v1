@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"gateway/pratise/proxy/load_balance"
 	"math/rand"
 )
 
@@ -10,7 +11,7 @@ type RandomBalance struct {
 	rss []string
 
 	// 观察主体
-	conf LoadBalanceConf
+	conf load_balance.LoadBalanceConf
 }
 
 func (r *RandomBalance) Add(params ...string) error {
