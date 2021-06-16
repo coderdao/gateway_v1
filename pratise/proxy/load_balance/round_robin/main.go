@@ -1,4 +1,4 @@
-package main
+package round_robin
 
 import (
 	"errors"

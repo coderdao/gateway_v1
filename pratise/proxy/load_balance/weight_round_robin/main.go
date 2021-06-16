@@ -1,4 +1,4 @@
-package main
+package weight_round_robin
 
 import (
 	"errors"

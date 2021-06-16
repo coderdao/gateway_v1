@@ -1,5 +1,12 @@
 package load_balance
 
+import (
+	"gateway/pratise/proxy/load_balance/hash"
+	"gateway/pratise/proxy/load_balance/random_load"
+	"gateway/pratise/proxy/load_balance/round_robin"
+	"gateway/pratise/proxy/load_balance/weight_round_robin"
+)
+
 type LbType int
 
 const (
@@ -12,15 +19,15 @@ const (
 func LoadBanlanceFactory(lbType LbType) LoadBalance {
 	switch lbType {
 	case LbRandom:
-		return &RandomBalance{}
+		return &random_load.RandomBalance{}
 	case LbConsistentHash:
-		return NewConsistentHashBanlance(10, nil)
+		return hash.NewConsistentHashBanlance(10, nil)
 	case LbRoundRobin:
-		return &RoundRobinBalance{}
+		return &round_robin.RoundRobinBalance{}
 	case LbWeightRoundRobin:
-		return &WeightRoundRobinBalance{}
+		return &weight_round_robin.WeightRoundRobinBalance{}
 	default:
-		return &RandomBalance{}
+		return &random_load.RandomBalance{}
 	}
 }
 
