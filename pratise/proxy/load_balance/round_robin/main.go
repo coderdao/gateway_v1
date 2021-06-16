@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"gateway/pratise/proxy/load_balance"
+	"strings"
 )
 
 /**
@@ -47,23 +48,23 @@ func (r *RoundRobinBalance) Get(key string) (string, error) {
 func (r *RoundRobinBalance) SetConf(conf load_balance.LoadBalanceConf) {
 	r.conf = conf
 }
-//
-//func (r *RoundRobinBalance) Update() {
-//	if conf, ok := r.conf.(*load_balance.LoadBalanceZkConf); ok {
-//		fmt.Println("Update get conf:", conf.GetConf())
-//		r.rss = []string{}
-//		for _, ip := range conf.GetConf() {
-//			r.Add(strings.Split(ip, ",")...)
-//		}
-//	}
-//	if conf, ok := r.conf.(*LoadBalanceCheckConf); ok {
-//		fmt.Println("Update get conf:", conf.GetConf())
-//		r.rss = nil
-//		for _, ip := range conf.GetConf() {
-//			r.Add(strings.Split(ip, ",")...)
-//		}
-//	}
-//}
+
+func (r *RoundRobinBalance) Update() {
+	if conf, ok := r.conf.(*load_balance.LoadBalanceZkConf); ok {
+		fmt.Println("Update get conf:", conf.GetConf())
+		r.rss = []string{}
+		for _, ip := range conf.GetConf() {
+			r.Add(strings.Split(ip, ",")...)
+		}
+	}
+	if conf, ok := r.conf.(*load_balance.LoadBalanceCheckConf); ok {
+		fmt.Println("Update get conf:", conf.GetConf())
+		r.rss = nil
+		for _, ip := range conf.GetConf() {
+			r.Add(strings.Split(ip, ",")...)
+		}
+	}
+}
 
 func main() {
 	rb := &RoundRobinBalance{}
