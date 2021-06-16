@@ -129,15 +129,15 @@ func (c *ConsistentHashBanlance) Update() {
 			c.Add(strings.Split(ip, ",")...)
 		}
 	}
-	//if conf, ok := c.conf.(*LoadBalanceCheckConf); ok {
-	//	fmt.Println("Update get conf:", conf.GetConf())
-	//	c.mux.Lock()
-	//	defer c.mux.Unlock()
-	//	c.keys = nil
-	//	c.hashMap = nil
-	//	for _, ip := range conf.GetConf() {
-	//		c.Add(strings.Split(ip, ",")...)
-	//	}
-	//}
+	if conf, ok := c.conf.(*load_balance.LoadBalanceCheckConf); ok {
+		fmt.Println("Update get conf:", conf.GetConf())
+		c.mux.Lock()
+		defer c.mux.Unlock()
+		c.keys = nil
+		c.hashMap = nil
+		for _, ip := range conf.GetConf() {
+			c.Add(strings.Split(ip, ",")...)
+		}
+	}
 }
 
