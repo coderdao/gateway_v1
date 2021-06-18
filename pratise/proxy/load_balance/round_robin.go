@@ -1,28 +1,22 @@
-package round_robin
+package load_balance
 
 import (
 	"errors"
 	"fmt"
-	"gateway/pratise/proxy/load_balance"
 	"strings"
 )
 
-/**
-	轮询负载均衡
- */
 type RoundRobinBalance struct {
 	curIndex int
-	rss []string
-
-	// 观察主体
-	conf load_balance.LoadBalanceConf
+	rss      []string
+	//观察主体
+	conf LoadBalanceConf
 }
 
 func (r *RoundRobinBalance) Add(params ...string) error {
 	if len(params) == 0 {
 		return errors.New("param len 1 at least")
 	}
-
 	addr := params[0]
 	r.rss = append(r.rss, addr)
 	return nil
@@ -45,42 +39,23 @@ func (r *RoundRobinBalance) Get(key string) (string, error) {
 	return r.Next(), nil
 }
 
-func (r *RoundRobinBalance) SetConf(conf load_balance.LoadBalanceConf) {
+func (r *RoundRobinBalance) SetConf(conf LoadBalanceConf) {
 	r.conf = conf
 }
 
 func (r *RoundRobinBalance) Update() {
-	if conf, ok := r.conf.(*load_balance.LoadBalanceZkConf); ok {
+	if conf, ok := r.conf.(*LoadBalanceZkConf); ok {
 		fmt.Println("Update get conf:", conf.GetConf())
 		r.rss = []string{}
 		for _, ip := range conf.GetConf() {
 			r.Add(strings.Split(ip, ",")...)
 		}
 	}
-	if conf, ok := r.conf.(*load_balance.LoadBalanceCheckConf); ok {
+	if conf, ok := r.conf.(*LoadBalanceCheckConf); ok {
 		fmt.Println("Update get conf:", conf.GetConf())
 		r.rss = nil
 		for _, ip := range conf.GetConf() {
 			r.Add(strings.Split(ip, ",")...)
 		}
 	}
-}
-
-func main() {
-	rb := &RoundRobinBalance{}
-	rb.Add("127.0.0.1:2003") //0
-	rb.Add("127.0.0.1:2004") //1
-	rb.Add("127.0.0.1:2005") //2
-	rb.Add("127.0.0.1:2006") //3
-	rb.Add("127.0.0.1:2007") //4
-
-	fmt.Println(rb.Next())
-	fmt.Println(rb.Next())
-	fmt.Println(rb.Next())
-	fmt.Println(rb.Next())
-	fmt.Println(rb.Next())
-	fmt.Println(rb.Next())
-	fmt.Println(rb.Next())
-	fmt.Println(rb.Next())
-	fmt.Println(rb.Next())
 }

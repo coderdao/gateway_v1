@@ -2,7 +2,7 @@ package load_balance
 
 import (
 	"fmt"
-	"gateway/pratise/proxy/zookeeper"
+	"github.com/e421083458/gateway_demo/proxy/zookeeper"
 )
 
 // 配置主题

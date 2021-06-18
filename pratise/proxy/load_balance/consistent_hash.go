@@ -1,35 +1,14 @@
-package hash
+package load_balance
 
 import (
 	"errors"
 	"fmt"
-	"gateway/pratise/proxy/load_balance"
 	"hash/crc32"
 	"sort"
 	"strconv"
 	"strings"
 	"sync"
 )
-
-func main() {
-	rb := NewConsistentHashBanlance(10, nil)
-	rb.Add("127.0.0.1:2003") //0
-	rb.Add("127.0.0.1:2004") //1
-	rb.Add("127.0.0.1:2005") //2
-	rb.Add("127.0.0.1:2006") //3
-	rb.Add("127.0.0.1:2007") //4
-
-	//url hash
-	fmt.Println(rb.Get("http://127.0.0.1:2002/base/getinfo"))
-	fmt.Println(rb.Get("http://127.0.0.1:2002/base/error"))
-	fmt.Println(rb.Get("http://127.0.0.1:2002/base/getinfo"))
-	fmt.Println(rb.Get("http://127.0.0.1:2002/base/changepwd"))
-
-	//ip hash
-	fmt.Println(rb.Get("127.0.0.1"))
-	fmt.Println(rb.Get("192.168.0.1"))
-	fmt.Println(rb.Get("127.0.0.1"))
-}
 
 type Hash func(data []byte) uint32
 
@@ -55,7 +34,7 @@ type ConsistentHashBanlance struct {
 	hashMap  map[uint32]string //节点哈希和Key的map,键是hash值，值是节点key
 
 	//观察主体
-	conf load_balance.LoadBalanceConf
+	conf LoadBalanceConf
 }
 
 func NewConsistentHashBanlance(replicas int, fn Hash) *ConsistentHashBanlance {
@@ -114,12 +93,12 @@ func (c *ConsistentHashBanlance) Get(key string) (string, error) {
 	return c.hashMap[c.keys[idx]], nil
 }
 
-func (c *ConsistentHashBanlance) SetConf(conf load_balance.LoadBalanceConf) {
+func (c *ConsistentHashBanlance) SetConf(conf LoadBalanceConf) {
 	c.conf = conf
 }
 
 func (c *ConsistentHashBanlance) Update() {
-	if conf, ok := c.conf.(*load_balance.LoadBalanceZkConf); ok {
+	if conf, ok := c.conf.(*LoadBalanceZkConf); ok {
 		fmt.Println("Update get conf:", conf.GetConf())
 		c.mux.Lock()
 		defer c.mux.Unlock()
@@ -129,7 +108,7 @@ func (c *ConsistentHashBanlance) Update() {
 			c.Add(strings.Split(ip, ",")...)
 		}
 	}
-	if conf, ok := c.conf.(*load_balance.LoadBalanceCheckConf); ok {
+	if conf, ok := c.conf.(*LoadBalanceCheckConf); ok {
 		fmt.Println("Update get conf:", conf.GetConf())
 		c.mux.Lock()
 		defer c.mux.Unlock()
