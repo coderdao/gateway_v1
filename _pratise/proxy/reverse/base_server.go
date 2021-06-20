@@ -1,5 +1,0 @@
-package reverse
-
-func newServe() {
-
-}
