@@ -26,7 +26,7 @@ func (s UInt32Slice) Swap(i, j int) {
 	s[i], s[j] = s[j], s[i]
 }
 
-type ConsistentHashBanlance struct {
+type HashBanlance struct {
 	mux      sync.RWMutex
 	hash     Hash
 	replicas int               //复制因子
@@ -37,8 +37,8 @@ type ConsistentHashBanlance struct {
 	conf LoadBalanceConf
 }
 
-func NewConsistentHashBanlance(replicas int, fn Hash) *ConsistentHashBanlance {
-	m := &ConsistentHashBanlance{
+func NewHashBanlance(replicas int, fn Hash) *HashBanlance {
+	m := &HashBanlance{
 		replicas: replicas,
 		hash:     fn,
 		hashMap:  make(map[uint32]string),
@@ -51,12 +51,12 @@ func NewConsistentHashBanlance(replicas int, fn Hash) *ConsistentHashBanlance {
 }
 
 // 验证是否为空
-func (c *ConsistentHashBanlance) IsEmpty() bool {
+func (c *HashBanlance) IsEmpty() bool {
 	return len(c.keys) == 0
 }
 
 // Add 方法用来添加缓存节点，参数为节点key，比如使用IP
-func (c *ConsistentHashBanlance) Add(params ...string) error {
+func (c *HashBanlance) Add(params ...string) error {
 	if len(params) == 0 {
 		return errors.New("param len 1 at least")
 	}
@@ -75,7 +75,7 @@ func (c *ConsistentHashBanlance) Add(params ...string) error {
 }
 
 // Get 方法根据给定的对象获取最靠近它的那个节点
-func (c *ConsistentHashBanlance) Get(key string) (string, error) {
+func (c *HashBanlance) Get(key string) (string, error) {
 	if c.IsEmpty() {
 		return "", errors.New("node is empty")
 	}
@@ -93,11 +93,11 @@ func (c *ConsistentHashBanlance) Get(key string) (string, error) {
 	return c.hashMap[c.keys[idx]], nil
 }
 
-func (c *ConsistentHashBanlance) SetConf(conf LoadBalanceConf) {
+func (c *HashBanlance) SetConf(conf LoadBalanceConf) {
 	c.conf = conf
 }
 
-func (c *ConsistentHashBanlance) Update() {
+func (c *HashBanlance) Update() {
 	if conf, ok := c.conf.(*LoadBalanceZkConf); ok {
 		fmt.Println("Update get conf:", conf.GetConf())
 		c.mux.Lock()

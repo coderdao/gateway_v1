@@ -5,8 +5,8 @@ import (
 	"testing"
 )
 
-func TestNewConsistentHashBanlance(t *testing.T) {
-	rb := NewConsistentHashBanlance(10, nil)
+func TestNewHashBanlance(t *testing.T) {
+	rb := NewHashBanlance(10, nil)
 	rb.Add("127.0.0.1:2003") //0
 	rb.Add("127.0.0.1:2004") //1
 	rb.Add("127.0.0.1:2005") //2
