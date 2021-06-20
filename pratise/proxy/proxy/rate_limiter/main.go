@@ -1,8 +1,8 @@
 package main
 
 import (
-	middleware "gateway/pratise/proxy/middlewarw"
-	"gateway/pratise/proxy/proxy"
+	"github.com/e421083458/gateway_demo/proxy/middleware"
+	"github.com/e421083458/gateway_demo/proxy/proxy"
 	"log"
 	"net/http"
 	"net/url"
@@ -12,7 +12,6 @@ var addr = "127.0.0.1:2002"
 
 // 熔断方案
 func main() {
-	// 设置限流配置
 	coreFunc := func(c *middleware.SliceRouterContext) http.Handler {
 		rs1 := "http://127.0.0.1:2003/base"
 		url1, err1 := url.Parse(rs1)
@@ -33,7 +32,6 @@ func main() {
 
 	sliceRouter := middleware.NewSliceRouter()
 	sliceRouter.Group("/").Use(middleware.RateLimiter())
-	// 注入到中间件
 	routerHandler := middleware.NewSliceRouterHandler(coreFunc, sliceRouter)
 	log.Fatal(http.ListenAndServe(addr, routerHandler))
 }
