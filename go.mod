@@ -9,6 +9,7 @@ require (
 	github.com/e421083458/grpc-proxy v0.2.0 // indirect
 	github.com/garyburd/redigo v1.6.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/samuel/go-zookeeper v0.0.0-20201211165307-7117e9ea2414 // indirect
 	golang.org/x/net v0.0.0-20210614182718-04defd469f4e // indirect
 	golang.org/x/time v0.0.0-20210611083556-38a9dc6acbc6 // indirect
