@@ -88,7 +88,7 @@ func main() {
   if useHttp {
     trans, err = thrift.NewTHttpClient(parsedUrl.String())
     if len(headers) > 0 {
-      httptrans := trans.(*thrift.THttpClient)
+      httptrans := trans(*thrift.THttpClient)
       for key, value := range headers {
         httptrans.SetHeader(key, value)
       }
