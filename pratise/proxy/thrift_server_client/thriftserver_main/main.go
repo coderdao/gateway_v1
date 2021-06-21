@@ -4,8 +4,8 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"gateway/pratise/proxy/thrift_server_client/gen-go/thrift_gen"
 	"git.apache.org/thrift.git/lib/go/thrift"
-	"github.com/e421083458/gateway_demo/demo/proxy/thrift_server_client/gen-go/thrift_gen"
 	"log"
 	"os"
 )
@@ -29,12 +29,15 @@ func main() {
 	}
 	handler := &FormatDataImpl{}
 	processor := thrift_gen.NewFormatDataProcessor(handler)
+	processor := thrift_gen.NewFormatDataProcessor(handler)
 	serverSocket, err := thrift.NewTServerSocket(*addr)
 	if err != nil {
 		log.Fatalln("Error:", err)
 	}
 
+
 	transportFactory := thrift.NewTFramedTransportFactory(thrift.NewTTransportFactory())
+
 	protocolFactory := thrift.NewTBinaryProtocolFactoryDefault()
 
 	server := thrift.NewTSimpleServer4(processor, serverSocket, transportFactory, protocolFactory)
