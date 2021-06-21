@@ -29,7 +29,6 @@ func main() {
 	}
 	handler := &FormatDataImpl{}
 	processor := thrift_gen.NewFormatDataProcessor(handler)
-	processor := thrift_gen.NewFormatDataProcessor(handler)
 	serverSocket, err := thrift.NewTServerSocket(*addr)
 	if err != nil {
 		log.Fatalln("Error:", err)

@@ -166,7 +166,7 @@ func (p *FormatDataClient) DoFormat(ctx context.Context, data *Data) (_r *Data, 
   _args0.Data = data
   var _result2 FormatDataDoFormatResult
   var _meta1 thrift.ResponseMeta
-  _meta1, _err = p.Client_().Call(ctx, "do_format", &_args0, &_result2)
+  _meta1, _err = p.Client().Call(ctx, "do_format", &_args0, &_result2)
   p.SetLastResponseMeta_(_meta1)
   if _err != nil {
     return
