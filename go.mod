@@ -5,6 +5,7 @@ go 1.13
 require (
 	git.apache.org/thrift.git v0.14.2 // indirect
 	github.com/afex/hystrix-go v0.0.0-20180502004556-fa1af6a1f4f5 // indirect
+	github.com/apache/thrift/lib/go/thrift v0.0.0-20210120171102-e27e82c46ba4 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/e421083458/gateway_demo v0.0.0-20201203134404-5a1814369ddf // indirect
 	github.com/e421083458/grpc-proxy v0.2.0 // indirect
