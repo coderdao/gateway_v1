@@ -3,9 +3,9 @@ module gateway
 go 1.13
 
 require (
-	git.apache.org/thrift.git v0.14.2
 	github.com/afex/hystrix-go v0.0.0-20180502004556-fa1af6a1f4f5
 	github.com/apache/thrift/lib/go/thrift v0.0.0-20210120171102-e27e82c46ba4
+	github.com/coderdao/thrift011 v0.0.0-20210622161510-5c65b0cd899b // indirect
 	github.com/e421083458/gateway_demo v0.0.0-20201203134404-5a1814369ddf
 	github.com/e421083458/grpc-proxy v0.2.0
 	github.com/garyburd/redigo v1.6.2 // indirect

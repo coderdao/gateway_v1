@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"gateway/pratise/proxy/thrift_server_client/gen-go/thrift_gen"
-	"git.apache.org/thrift.git/lib/go/thrift"
+	"github.com/coderdao/thrift011/lib/go/thrift"
 	"log"
 	"os"
 )
