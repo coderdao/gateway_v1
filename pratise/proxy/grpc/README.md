@@ -1,6 +1,3 @@
-## 安装grpc 
-项目地址：https://github.com/grpc/grpc-go
-本地代码位置： pratise/proxy/grpc
 # 关于grpc方面功能演示为了简便期间，统一使用非加密方式
 
 # 首先确保安装了grpc 安装，安装步骤请参照
