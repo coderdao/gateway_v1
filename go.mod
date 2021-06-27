@@ -13,6 +13,9 @@ require (
 	github.com/gorilla/websocket v1.4.2
 	github.com/samuel/go-zookeeper v0.0.0-20201211165307-7117e9ea2414
 	golang.org/x/net v0.0.0-20210614182718-04defd469f4e // indirect
+	golang.org/x/sys v0.0.0-20210616094352-59db8d763f22 // indirect
 	golang.org/x/time v0.0.0-20210611083556-38a9dc6acbc6
+	google.golang.org/genproto v0.0.0-20210624195500-8bfb893ecb84 // indirect
 	google.golang.org/grpc v1.38.0
+	google.golang.org/protobuf v1.27.0 // indirect
 )
