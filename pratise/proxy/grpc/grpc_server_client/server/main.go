@@ -90,3 +90,8 @@ func main() {
 	pb.RegisterEchoServer(s, &server{})
 	s.Serve(lis)
 }
+
+/**
+$ curl 'http://127.0.0.1:8081/v1/example/echo' -d '{"message":"11222222"}'
+{"message":"11222222"}
+ */
