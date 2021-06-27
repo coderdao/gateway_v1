@@ -20,6 +20,7 @@ const (
 
 type server struct{}
 
+// 服务端流式处理
 func (s *server) ServerStreamingEcho(in *pb.EchoRequest, stream pb.Echo_ServerStreamingEchoServer) error {
 	fmt.Printf("--- ServerStreamingEcho ---\n")
 	fmt.Printf("request received: %v\n", in)
@@ -34,6 +35,7 @@ func (s *server) ServerStreamingEcho(in *pb.EchoRequest, stream pb.Echo_ServerSt
 	return nil
 }
 
+// 客户端流式处理
 func (s *server) ClientStreamingEcho(stream pb.Echo_ClientStreamingEchoServer) error {
 	fmt.Printf("--- ClientStreamingEcho ---\n")
 	// Read requests and send responses.
@@ -52,6 +54,7 @@ func (s *server) ClientStreamingEcho(stream pb.Echo_ClientStreamingEchoServer) e
 	}
 }
 
+// 双向数据流
 func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamingEchoServer) error {
 	fmt.Printf("--- BidirectionalStreamingEcho ---\n")
 	// Read requests and send responses.

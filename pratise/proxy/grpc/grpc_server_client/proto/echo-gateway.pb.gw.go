@@ -43,7 +43,7 @@ func request_Echo_UnaryEcho_0(ctx context.Context, marshaler runtime.Marshaler, 
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.UnaryEcho(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := UnaryEcho(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
@@ -60,7 +60,7 @@ func local_request_Echo_UnaryEcho_0(ctx context.Context, marshaler runtime.Marsh
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.UnaryEcho(ctx, &protoReq)
+	msg, err := UnaryEcho(ctx, &protoReq)
 	return msg, metadata, err
 
 }
