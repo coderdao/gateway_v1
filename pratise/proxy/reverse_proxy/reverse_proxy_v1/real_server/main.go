@@ -16,8 +16,8 @@ func main()  {
 	rs1 := &RealServer{Addr:"127.0.0.1:2003"}
 	rs1.Run()
 
-	//rs2 := &RealServer{Addr:"127.0.0.1:2004"}
-	//rs2.Run()
+	rs2 := &RealServer{Addr:"127.0.0.1:2004"}
+	rs2.Run()
 
 	// 监听服务关闭信号
 	quit := make(chan os.Signal)
